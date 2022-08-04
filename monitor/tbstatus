@@ -28,15 +28,15 @@ echo "  ----------------------------------------------"
 
 else
 Listener=`ps -u $LOGNAME -f|grep tblistener|grep -v grep|awk '{print $2}'`
-PWT=`ps -efL|grep $LOGNAME|grep tbsvr_WT001 |grep -v grep |wc -l`
+PWT=`ps -efL|grep $LOGNAME|egrep "tbsvr_WT001|tbsvr_FGWP000" |grep -v grep |wc -l`
 WT=`expr "$PWT" - 1`
-MTHR=`tbdown pid|grep "MTHR"|grep -v grep|awk -F: '{print $1}'`
-SEQW=`tbdown pid|grep "SEQW"|grep -v grep|awk -F: '{print $1}'`
+MTHR=`tbdown pid|egrep "MTHR|MGWP"|grep -v grep|awk -F: '{print $1}'`
+SEQW=`tbdown pid|egrep "SEQW|AGNT"|grep -v grep|awk -F: '{print $1}'`
 LGWR=`tbdown pid|grep "LOGW"|grep -v grep|awk -F: '{print $1}'`
 LARC=`tbdown pid|grep "LOGA"|grep -v grep|awk -F: '{print $1}'`
 CKPT=`tbdown pid|grep "CKPT"|grep -v grep|awk -F: '{print $1}'`
-DBWR=`tbdown pid|grep "BLKW"|grep -v grep|awk -F: '{print $1}'`
-WTC=`tbdown pid|grep "WT"|grep -v grep |wc -l`
+DBWR=`tbdown pid|egrep "BLKW|DBWR"|grep -v grep|awk -F: '{print $1}'`
+WTC=`tbdown pid|egrep "WT|FGWP"|grep -v grep |wc -l`
 
 echo "  -------------------"
 echo "  Running..."
